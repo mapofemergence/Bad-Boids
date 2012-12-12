@@ -1,17 +1,17 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MayaBoids", "MayaBoids\MayaBoids.vcproj", "{D7490162-26C9-4F15-939F-B2EDA2F0D93C}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MayaBoids", "MayaBoids\MayaBoids.vcxproj", "{D7490162-26C9-4F15-939F-B2EDA2F0D93C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KDTree", "KDTree\KDTree.vcproj", "{452103F7-7D1C-402A-9D4A-74FC7403D7EC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KDTree", "KDTree\KDTree.vcxproj", "{452103F7-7D1C-402A-9D4A-74FC7403D7EC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Mathematics", "Mathematics\Mathematics.vcproj", "{AF11F3E6-4BB8-4493-8F7F-F08A81D98545}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Mathematics", "Mathematics\Mathematics.vcxproj", "{AF11F3E6-4BB8-4493-8F7F-F08A81D98545}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MayaCache", "MayaCache\MayaCache.vcproj", "{1AD3C8DD-BB83-41AC-846D-9F4D8F0CB414}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MayaCache", "MayaCache\MayaCache.vcxproj", "{1AD3C8DD-BB83-41AC-846D-9F4D8F0CB414}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testDLL", "testDLL\testDLL.vcproj", "{DDF03FAA-80D3-4FCB-B9E1-D79C5CA7AFC6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testDLL", "testDLL\testDLL.vcxproj", "{DDF03FAA-80D3-4FCB-B9E1-D79C5CA7AFC6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MayaBoidsPlugin", "MayaBoidsPlugin\MayaBoidsPlugin.vcproj", "{67B376DB-ABED-4B79-BA36-E28A6F6082D8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MayaBoidsPlugin", "MayaBoidsPlugin\MayaBoidsPlugin.vcxproj", "{67B376DB-ABED-4B79-BA36-E28A6F6082D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

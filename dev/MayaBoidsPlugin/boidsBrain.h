@@ -5,6 +5,7 @@
 #include <maya/MFnTypedAttribute.h>
 #include <maya/MFnEnumAttribute.h>
 #include <maya/MFnMessageAttribute.h>
+#include <maya/MFnCompoundAttribute.h>
 #include <maya/MFnDependencyNode.h>
 #include <maya/MObject.h>
 #include <maya/MGlobal.h>
@@ -17,9 +18,10 @@ class boidsBrain : public MPxNode
 		static const MTypeId typeId;
 		
 		// simulation params
+		static MObject simulationSolve;		// [int] 0 = CPU; 1 = GPU
 		static MObject simulationLength;	// [int] in seconds
 		static MObject framesPerSecond;		// [int]
-		static MObject startFrame;		// [int]
+		static MObject startFrame;			// [int]
 
 		static MObject particleSystem;		// [mess]
 		static MObject boidsNumber;			// [int]
@@ -27,6 +29,26 @@ class boidsBrain : public MPxNode
 		static MObject logFilePath;			// [char *]
 		static MObject logFileName;			// [char *]
 		static MObject logFileType;			// [double] 0 = txt log file; 1 = XML; 2 = nCache
+		//
+		static MObject cacheChannels;		// compound
+		static MObject cacheId;
+		static MObject cacheCount;
+		static MObject cacheBirth;
+		static MObject cachePos;
+		static MObject cacheVel;
+		static MObject cacheAcc;
+		/*
+		LIFESPANPP
+		FINALLIFESPANPP
+		WORLDPOSITION
+		WORLDVELOCITY
+		WORLDVELOCITYINOBJECTSPACE
+		MASS
+		AGE
+		RGBPP
+		OPACITYPPCHANNEL
+		RADIUSPPCHANNEL
+		*/
 		// desire params
 		setRuleAttributes(alignment)
 		setRuleAttributes(cohesion)

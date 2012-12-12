@@ -67,6 +67,7 @@ MStatus simulateBoids::doIt( const MArgList& args )
 	MPlug plug;
 
 	// simulation params
+	int simulationSolveValue;		// 0 = CPU; 1 = GPU; 
 	int simulationLengthValue;		// [int] in seconds
 	int framesPerSecondValue;		// [int]
 	int startFrameValue;			// [int]
@@ -99,6 +100,7 @@ MStatus simulateBoids::doIt( const MArgList& args )
 	
 	// plug = nodeFn.findPlug("simulationLength");
 	// plug.getValue(dblValue);
+	getPlugValue(simulationSolve)
 	getPlugValue(simulationLength);
 	getPlugValue(framesPerSecond);
 	getPlugValue(startFrame);

@@ -2,7 +2,7 @@
 #define _RULESETUP_H_
 
 #include "Boolean.h"
-#include <kdtree.h>					// generic kdtree implementation
+#include <kdtree.h>		// generic kdtree implementation
 #include <Boid.h>		// Boid struct and operations
 
 //#include "../KDTree/kdtree.h"			// generic kdtree implementation

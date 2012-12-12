@@ -45,6 +45,9 @@ for(int i=0; i<RULEATTRIBUTESLENGTH; i++)
 	_name = tAttr.create( #_name, #_shortname, MFnData::kString, &status ); \
 	nodeAddAttribute( _name ); \
 
+#define nodeCreateAttrEnum(_name, _shortname, _value) \
+	_name = eAttr.create( #_name, #_shortname, _value)
+
 #define nodeCreateAttrMess(_name, _shortname) \
 	_name = mAttr.create( #_name, #_shortname); \
 	nodeAddAttribute( _name ); \

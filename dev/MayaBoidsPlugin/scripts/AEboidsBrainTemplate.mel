@@ -30,6 +30,54 @@ global proc updateSimCmdButton( string $nodeName )
     button -e -c ("launchSimCmd " + $nodeName) simLauncher; 
 }
 
+global proc makeCacheParams( string $nodeName )
+{
+	// string $nodeName = substring($nodeName,1,size($nodeName)-1);
+	// print "create\n";
+	print( "make node: " + $nodeName + "\n");
+	
+	int $cacheId = `getAttr ($nodeName + ".cacheId")`;
+	int $cacheCount = `getAttr ($nodeName + ".cacheCount")`;
+	int $cacheBirth = `getAttr ($nodeName + ".cacheBirth")`;
+	int $cachePos = `getAttr ($nodeName + ".cachePos")`;
+	int $cacheVel = `getAttr ($nodeName + ".cacheVel")`;
+	int $cacheAcc = `getAttr ($nodeName + ".cacheAcc")`;
+	
+	columnLayout -cat "left" 20 -adj true; // -adjustableColumn true;
+		text -l "Cache Channels" -fn "boldLabelFont" -al "left";
+		separator -style "none" -h 6;
+	setParent ..;
+	columnLayout -cat "both" 20 -adj true; // -adjustableColumn true;
+		rowLayout -nc 3 -cw3 140 140 140 -w 440;
+			checkBox -label "Id" /*-w 120 -bgc 1 0 0*/ -v $cacheId -cc ("updateCacheParams " + $nodeName + ".cacheId") cacheId;
+			checkBox -label "Count" /*-w 120 -bgc 0 1 0*/ -v $cacheCount -cc ("updateCacheParams " + $nodeName + ".cacheCount") cacheCount;
+			checkBox -label "Birth" /*-w 120 -bgc 0 0 1*/ -v $cacheBirth -cc ("updateCacheParams " + $nodeName + ".cacheBirth") cacheBirth;
+		setParent ..;
+		rowLayout -nc 3-cw3 140 140 140 -w 440;
+			checkBox -label "Position" /*-w 120 -bgc 1 0 0*/  -v $cachePos -cc ("updateCacheParams " + $nodeName + ".cachePos") cachePos;
+			checkBox -label "Velocity" /*-w 120 -bgc 0 1 0*/ -v $cacheVel -cc ("updateCacheParams " + $nodeName + ".cacheVel") cacheVel;
+			checkBox -label "Acceleration" /*-w 120 -bgc 0 0 1*/ -v $cacheAcc -cc ("updateCacheParams " + $nodeName + ".cacheAcc") cacheAcc;
+	setParent ..;
+	separator -style "none" -h 6;
+	
+}
+global proc updateCacheParams( string $attrPath )
+{
+	// string $nodeName = substring($nodeName,1,size($nodeName)-1);
+	// print( "update node: " + $nodeName +"\n");
+	// print( "update node: " + $attrPath +"\n");
+	// print "update\n";
+	string $attrNames[];
+	tokenize $attrPath "." $attrNames;
+	string $attrName = $attrNames[size($attrNames)-1];
+	int $cacheVal = `checkBox -q -v $attrName`;
+	print $cacheVal;
+	setAttr $attrPath $cacheVal;
+	
+    checkBox -e -cc ("updateCacheParams " + $attrPath) $attrName; 
+	// checkBox -e -v $cacheVal -cc ("updateCacheParams cacheVel") cacheVel; 
+}
+
 global proc int bbBrowseDir(string $path, string $fileType)
 {
 	textField -e -tx $path logFilePathField;
@@ -131,9 +179,13 @@ global proc AEboidsBrainTemplate( string $nodeName )
 			editorTemplate -callCustom "makePathBrowser" "updatePathBrowser" "logFilePath"; //$nodeName;
 			editorTemplate -addControl "logFileName";
 			editorTemplate -addControl "logFileType";
+			editorTemplate -addSeparator;
+			editorTemplate -callCustom "makeCacheParams" "updateCacheParams" "cacheChannels";
 		editorTemplate -endLayout;
 		
 		editorTemplate -beginLayout "Simulation" -collapse 0;
+			editorTemplate -addControl "simulationSolve";
+			editorTemplate -addSeparator;
 			editorTemplate -callCustom "makeSimCmdButton" "updateSimCmdButton" ""; //$nodeName;
 		editorTemplate -endLayout;
 		
