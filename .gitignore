@@ -33,3 +33,4 @@ dev/KDTree/Debug/
 *.tlog
 *.user
 *.ncb
+*.vcproj

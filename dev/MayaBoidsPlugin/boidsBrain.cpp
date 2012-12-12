@@ -2,16 +2,26 @@
 
 // attributes' declaration
 // simulation params
+declareAttr(simulationSolve)	// [int] 0 = txt log file; 1 = XML
 declareAttr(simulationLength)	// [int] in seconds
 declareAttr(framesPerSecond)	// [int]
-declareAttr(startFrame)		// [int]
+declareAttr(startFrame)			// [int]
 
 declareAttr(particleSystem)		// [mess]
 declareAttr(boidsNumber)		// [int]
 // export params
 declareAttr(logFilePath)		// [char *]
 declareAttr(logFileName)		// [char *]
-declareAttr(logFileType)		// [double] 0 = txt log file; 1 = XML
+declareAttr(logFileType)		// [double] 0 = txt log file; 1 = XML; 2 = nCache
+// channels' selection
+declareAttr(cacheChannels)
+declareAttr(cacheId)
+declareAttr(cacheCount)
+declareAttr(cacheBirth)
+declareAttr(cachePos)
+declareAttr(cacheVel)
+declareAttr(cacheAcc)
+
 // desire params
 declareRuleAttributes(alignment)
 declareRuleAttributes(cohesion)
@@ -32,6 +42,7 @@ declareAttr(maxForce)	// [double]
 
 // attributes defaults macros
 
+#define BDZ_SIMTYPE			0
 #define BDZ_SIMLEN			10
 #define BDZ_FPS				24
 #define BDZ_STF				1
@@ -91,6 +102,27 @@ MStatus boidsBrain::initialize()
 	MFnEnumAttribute		eAttr;
 	MFnMessageAttribute		mAttr;
 	// MFnUnitAttribute		uAttr;
+	MFnCompoundAttribute	cAttr;
+
+	/*
+	nodeCreateAttrNum(cachePos, chp, kBoolean, 1);
+	nodeCreateAttrNum(cacheVel, chv, kBoolean, 1);
+	*/
+	cacheId = nAttr.create( "cacheId", "chi", MFnNumericData::kBoolean, 1);
+	cacheCount = nAttr.create( "cacheCount", "chc", MFnNumericData::kBoolean, 1);
+	cacheBirth = nAttr.create( "cacheBirth", "chb", MFnNumericData::kBoolean, 1);
+	cachePos = nAttr.create( "cachePos", "chp", MFnNumericData::kBoolean, 1);
+	cacheVel = nAttr.create( "cacheVel", "chv", MFnNumericData::kBoolean, 1);
+	cacheAcc = nAttr.create( "cacheAcc", "cha", MFnNumericData::kBoolean, 1);
+	//
+	cacheChannels = cAttr.create("cacheChannels", "cc", &status);
+	cAttr.addChild( cacheId ) ;
+	cAttr.addChild( cacheCount ) ;
+	cAttr.addChild( cacheBirth ) ;
+	cAttr.addChild( cachePos ) ;
+	cAttr.addChild( cacheVel ) ;
+	cAttr.addChild( cacheAcc ) ;
+	addAttribute( cacheChannels );
 
 	// MString				attrOpt;
 	
@@ -108,14 +140,21 @@ MStatus boidsBrain::initialize()
 	nodeCreateAttrTyp(logFileName, ln);
 	// inputSurface = tAttr.create( "inputSurface", "is",MFnData::kNurbsSurface,&stat );
 	// nodeCreateAttrTyped(logFileName, ln, BDZ_LOGNAME);
-	logFileType = eAttr.create("logFileType", "lt", BDZ_LOGTYPE);
+	
+	nodeCreateAttrEnum(logFileType, lt, BDZ_LOGTYPE);
+	// logFileType = eAttr.create("logFileType", "lt", BDZ_LOGTYPE);
 	eAttr.addField("nCache file", 0);
 	eAttr.addField("log file", 1);
 	eAttr.addField("XML file", 2);
 	// eAttr.setStorable(true);
 	// nodeCreateAttrNum(logFileType, lt, kDouble, BDZ_LOGTYPE);
 	nodeAddAttribute(logFileType);
-	
+
+	nodeCreateAttrEnum(simulationSolve, ss, BDZ_SIMTYPE);
+	eAttr.addField("CPU solve", 0);
+	eAttr.addField("GPU solve", 1);
+	nodeAddAttribute(simulationSolve);
+
 	nodeCreateRuleAttributes(alignment, a)
 	nodeCreateRuleAttributes(cohesion, c)
 	nodeCreateRuleAttributes(separation, s)
